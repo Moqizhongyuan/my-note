@@ -1,11 +1,6 @@
+import { Inote } from "./Note";
 import SidebarNoteItemContent from "./SidebarNoteItemContent";
 import SidebarNoteItemHeader from "@/components/SidebarNoteItemHeader";
-
-interface Inote {
-  title: string;
-  content: string;
-  updateTime: string;
-}
 
 export default function SidebarNoteItem({
   noteId,
