@@ -1,4 +1,4 @@
-import Redis, { Callback } from "ioredis";
+import Redis from "ioredis";
 
 const redis = new Redis();
 
@@ -19,17 +19,14 @@ export async function getAllNotes() {
   return await redis.hgetall("notes");
 }
 
-export async function addNote(data: Callback<number> | undefined) {
+export async function addNote(data: string | undefined) {
   const uuid = Date.now().toString();
-  await redis.hset("notes", [uuid], data);
+  await redis.hset("notes", { [uuid]: data });
   return uuid;
 }
 
-export async function updateNote(
-  uuid: string,
-  data: Callback<number> | undefined
-) {
-  await redis.hset("notes", [uuid], data);
+export async function updateNote(uuid: string, data: string | undefined) {
+  await redis.hset("notes", { [uuid]: data });
 }
 
 export async function getNote(uuid: string) {

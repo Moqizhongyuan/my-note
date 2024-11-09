@@ -9,7 +9,7 @@ export default function EditButton({
   noteId: string | null;
   children: ReactNode;
 }) {
-  const isDraft = noteId === null;
+  const isDraft = !noteId;
   return (
     <Link href={`/note/edit/${noteId || ""}`} className="link--unstyled">
       <button

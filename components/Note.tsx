@@ -12,7 +12,7 @@ export default function Note({
   noteId,
   note,
 }: {
-  noteId: string;
+  noteId: string | null;
   note: Inote;
 }) {
   const { title, content, updateTime } = note;
