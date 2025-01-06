@@ -1,10 +1,14 @@
 import Note from "@/components/Note";
 import { getNote } from "@/lib/redis";
-import { Params } from "next/dist/server/request/params";
 
-export default async function Page({ params }: { params: Params }) {
+export default async function Page({
+  params,
+}: {
+  params: { id: string; [key: string]: unknown };
+}) {
   // 动态路由 获取笔记 id
-  const { id: noteId } = (await params) as { id: string };
+  params = await params;
+  const noteId = params.id;
   const note = await getNote(noteId);
 
   if (note == null) {
