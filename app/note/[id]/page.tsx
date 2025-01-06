@@ -1,14 +1,11 @@
 import Note from "@/components/Note";
 import { getNote } from "@/lib/redis";
 
-export default async function Page({
-  params,
-}: {
-  params: { id: string; [key: string]: unknown };
-}) {
-  // 动态路由 获取笔记 id
-  params = await params;
+export default async function Page({ params }: { params: { id: string } }) {
+  // 动态路由获取笔记 id
   const noteId = params.id;
+
+  // 从 Redis 中获取笔记
   const note = await getNote(noteId);
 
   if (note == null) {
@@ -21,5 +18,6 @@ export default async function Page({
     );
   }
 
+  // 渲染 Note 组件
   return <Note noteId={noteId} note={note} />;
 }
