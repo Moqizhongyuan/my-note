@@ -1,13 +1,11 @@
 import Note from "@/components/Note";
 import { getNote } from "@/lib/redis";
 
-export default async function Page({
-  params,
-}: {
-  params: { id: string; [key: string]: unknown };
+export default async function Page(props: {
+  params: Promise<{ id: string; [key: string]: unknown }>;
 }) {
+  const params = await props.params;
   // 动态路由 获取笔记 id
-  params = await params;
   const noteId = params.id;
   const note = await getNote(noteId);
 
