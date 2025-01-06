@@ -30,7 +30,7 @@ export async function updateNote(uuid: string, data: string | undefined) {
 }
 
 export async function getNote(uuid: string) {
-  return JSON.parse((await redis.hget("notes", uuid)) ?? "");
+  return JSON.parse((await redis.hget("notes", uuid)) ?? "null");
 }
 
 export async function delNote(uuid: string) {

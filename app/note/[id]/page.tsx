@@ -1,11 +1,10 @@
 import Note from "@/components/Note";
 import { getNote } from "@/lib/redis";
+import { Params } from "next/dist/server/request/params";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  // 动态路由获取笔记 id
-  const noteId = params.id;
-
-  // 从 Redis 中获取笔记
+export default async function Page({ params }: { params: Params }) {
+  // 动态路由 获取笔记 id
+  const { id: noteId } = (await params) as { id: string };
   const note = await getNote(noteId);
 
   if (note == null) {
@@ -18,6 +17,5 @@ export default async function Page({ params }: { params: { id: string } }) {
     );
   }
 
-  // 渲染 Note 组件
   return <Note noteId={noteId} note={note} />;
 }
